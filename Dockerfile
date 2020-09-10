@@ -11,6 +11,9 @@ RUN rm -rf /tmp/src/.git* && \
 
 ENV TERMINAL_TAB=split
 
+RUN yum install docker -y
+
 USER 1001
 
 RUN /usr/libexec/s2i/assemble
+RUN git clone https://github.com/afouladi7/quay_workshop_instructions.git

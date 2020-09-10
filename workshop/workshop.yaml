@@ -1,8 +1,10 @@
-name: Markdown Sample
+name: Quay Workshop
 
 modules:
     activate:
-    - workshop-overview
-    - setup-environment
-    - exercises/01-sample-content
-    - workshop-summary
+    - exercises/01-intro
+    - exercises/02-lab-01
+    - exercises/03-lab-02
+    - exercises/04-lab-03
+    - exercises/05-lab-04
+    - exercises/06-lab-05

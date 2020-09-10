@@ -1,7 +1,7 @@
-WORKSHOP_NAME=lab-markdown-sample
-WORKSHOP_IMAGE=quay.io/openshifthomeroom/lab-markdown-sample:1.10
-WORKSHOP_TITLE="Markdown Sample"
-WORKSHOP_DESCRIPTION="A sample workshop using Markdown"
+WORKSHOP_NAME=quay
+WORKSHOP_IMAGE=imagestream.image.openshift.io/quay-session:latest
+WORKSHOP_TITLE="Quay Workshop V1"
+WORKSHOP_DESCRIPTION="Quay Workshop V1"
 RESOURCE_BUDGET=medium
 MAX_SESSION_AGE=3600
 IDLE_TIMEOUT=300
