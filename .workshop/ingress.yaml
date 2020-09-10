@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: spawner
+  annotations:
+    homeroom/title: "Markdown Sample"
+    homeroom/description: "A sample workshop using Markdown."
+spec:
+  rules:
+  - host: "lab-markdown-sample.${CLUSTER_SUBDOMAIN}"
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: spawner
+          servicePort: 8080
