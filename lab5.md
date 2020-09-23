@@ -14,7 +14,7 @@ Note for students:
 * From the Quay dashboard, click `centos-mirror`
 * Click the `tags` icon
 * On any of the tags in your repository, click the `fetch tag` icon
-![Fetch tag icon](images/fetch-tag-icon.png)
+![Fetch tag icon](/images/fetch-tag-icon.png)
 
 The `Fetch Tag` dialog appears
 

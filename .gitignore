@@ -2,3 +2,5 @@
 .config
 .bash_history
 *.swp
+*new
+new*

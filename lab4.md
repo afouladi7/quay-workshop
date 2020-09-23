@@ -20,7 +20,7 @@ TODO: what can we do with these?
 
 Recall from `Lab 2 - Repo Mirroring`, we set our Centos mirror to fire every 60 secs. So we should expect a notice in the top of our dashboard to increment roughly every minute as well. (pictured below)
 
-![Notification Icon](images/notification-bell.png)
+![Notification Icon](/images/notification-bell.png)
 
 Clicking on the bell will show you what notifications have fired. Note, if you're not seeing an update, try refreshing your page. If these become annoying, you can delete the previous notification in the settings configuration page for the `centos-mirror` repo.
 
@@ -43,7 +43,7 @@ Previously in Lab 2, we set Quay to mirror a specific tag, and a wildcard for al
 
 * From the `centos-mirror` repo, click the `mirror` icon shown below:
 
-![Mirroring Icon](images/lab2-1.png)
+![Mirroring Icon](/images/lab2-1.png)
 
 * Click on the list of tags in the `Tags` field
 * The `Update Tag Filter` dialog is shown. Append `7.*` to your tags filter so that it looks like the example below:
@@ -59,7 +59,7 @@ Within 60 seconds or so, you should see a list of `POST` actions begin to popula
 
 Example POST received on the webhook site:
 
-![Webhook.site](images/webhook-site.png)
+![Webhook.site](/images/webhook-site.png)
 
 
 ## Next Lab:
