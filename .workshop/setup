@@ -6,7 +6,7 @@
 # this script, or are deploying applications, your scripts must cope with
 # the steps having already been run. This is because this script will be
 # run a second time if the container were restarted for some reason.
-oc project --short | read user
+read user < <(oc project --short)
 #Install the Quay Operator
 oc project $user
 cat <<EOF | oc apply -f -
