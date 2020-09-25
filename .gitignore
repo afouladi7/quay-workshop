@@ -1,3 +1,5 @@
+.gitmodules
+.giti*
 .kube
 .config
 .bash_history

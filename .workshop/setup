@@ -8,7 +8,6 @@
 # run a second time if the container were restarted for some reason.
 read user < <(oc project --short)
 oc login -u opentlc-mgr -p r3dh4t1!
-oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:homeroom:$user
 #Install the Quay Operator
 oc whoami > text
 cat <<EOF | oc apply -f -
@@ -37,6 +36,19 @@ spec:
   sourceNamespace: openshift-marketplace
 # Secret required to pull from quay.io
 EOF
-oc adm policy remove-cluster-role-from-user cluster-admin system:serviceaccount:homeroom:$user
+cat <<EOF | oc apply -f -
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: object-counts
+  namespace: $user
+spec:
+  hard:
+    configmaps: "10" 
+    persistentvolumeclaims: "6" 
+    replicationcontrollers: "15" 
+    secrets: "50" 
+    services: "10"
+EOF
 oc adm policy add-role-to-user admin system:serviceaccount:homeroom:$user -n $user
 oc login -u system:serviceaccount:homeroom:$user
