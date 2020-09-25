@@ -1,0 +1,123 @@
+#!/bin/bash
+
+# This 'setup' script is where you can add steps that should be run each
+# time the container for the workshop is started. Note that if you are
+# using persistent storage with a workshop and make changes to files from
+# this script, or are deploying applications, your scripts must cope with
+# the steps having already been run. This is because this script will be
+# run a second time if the container were restarted for some reason.
+read user < <(oc project --short)
+oc login -u opentlc-mgr -p r3dh4t1!
+oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:homeroom:$user
+#Install the Quay Operator
+oc whoami > text
+cat <<EOF | oc apply -f -
+# Base namespace for creation of operator
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: quay-enterprise-operatorgroup
+  namespace: $user
+spec:
+  targetNamespaces:
+  - $user
+# Subscription to trigger OLM installation
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: quay-operator
+  namespace: $user
+spec:
+  channel: quay-v3.3
+  installPlanApproval: Automatic
+  name: quay-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+# Secret required to pull from quay.io
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: redhat-pull-secret
+  namespace: $user
+data:
+  .dockerconfigjson: >-
+    ewoJImF1dGhzIjogewoJCSJodHRwczovL3F1YXllY29zeXN0ZW0tcXVheS1xdWF5LmFwcHMudGFoZGlnLmFsbGVuZm91bGFkaS5jb20vIjogewoJCQkiYXV0aCI6ICJZV3hzWlc0NlNtRm5hR1J2YjNOa1lYSnBNU0U9IgoJCX0sCgkJImh0dHBzOi8vcmVnaXN0cnkuYWNjZXNzLnJlZGhhdC5jb20vdjEvIjogewoJCQkiYXV0aCI6ICJZV3hzWlc0NlNtRm5hR1J2YjNOa1lYSnBNU0U9IgoJCX0sCgkJInF1YXkuaW8iOiB7CgkJCSJhdXRoIjogImNtVmthR0YwSzNGMVlYazZUemd4VjFOSVVsTktVakUwVlVGYVFrczFORWRSU0VwVE1GQXhWalJEVEZkQlNsWXhXREpETkZORU4wdFBOVGxEVVRsT00xSkZNVEkyTVRKWVZURklVZz09IgoJCX0sCgkJInF1YXllY29zeXN0ZW0tcXVheS1xdWF5LmFwcHMudGFoZGlnLmFsbGVuZm91bGFkaS5jb20iOiB7CgkJCSJhdXRoIjogIllXeHNaVzQ2U21GbmFHUnZiM05rWVhKcE1TRT0iCgkJfQoJfQp9
+type: kubernetes.io/dockerconfigjson
+EOF
+
+#Create secrets for quay, redis, postgres
+cat <<EOF | oc apply -f -
+# Secret to change default password for super-user
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: quay-superuser
+  namespace: $user
+type: Opaque
+stringData:
+  superuser-username: quay
+  superuser-password: openshift
+  superuser-email: quay@redhat.com
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: quay-database-credential
+  namespace: $user
+type: Opaque
+stringData:
+  database-username: quay
+  database-password: openshift
+  database-root-password: openshift
+  database-name: quay-enterprise
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: quay-config-app
+  namespace: $user
+type: Opaque
+stringData:
+  config-app-password: openshift
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: quay-redis-password
+  namespace: $user
+type: Opaque
+stringData:
+  password: openshift
+EOF
+#Launch an instance of Quay
+cat <<EOF | oc apply -f -
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: QuayEcosystem
+metadata:
+  name: quayecosystem-$user
+  namespace: $user
+spec:
+  quay:
+    enableRepoMirroring: true
+    keepConfigDeployment: true
+    database:
+      volumeSize: 10Gi
+    imagePullSecretName: redhat-pull-secret
+    registryStorage:
+      persistentVolumeAccessModes:
+        - ReadWriteOnce
+    persistentVolumeSize: 10Gi
+    securityContext:
+      fsGroup: 1001
+  clair:
+    enabled: true
+    imagePullSecretName: redhat-pull-secret
+    updateInterval: "60m"
+  redis:
+    credentialsSecretName: quay-redis-password
+    imagePullSecretName: redhat-pull-secret
+EOF

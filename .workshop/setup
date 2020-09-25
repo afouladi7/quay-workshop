@@ -39,4 +39,4 @@ spec:
 EOF
 oc adm policy remove-cluster-role-from-user cluster-admin system:serviceaccount:homeroom:$user
 oc adm policy add-role-to-user admin system:serviceaccount:homeroom:$user -n $user
-oc login -u $user
+oc login -u system:serviceaccount:homeroom:$user
