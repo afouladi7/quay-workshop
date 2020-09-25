@@ -4,10 +4,7 @@ read -p "Please enter your email address: " email
 read -p "Please enter desired username: " username
 read -sp "Please enter desired password (at least 8 characters and 1 number): " password
 printf '\n-------------------\n'
-oc create secret generic redhat-pull-secret \
-  --from-file=".dockerconfigjson=config.json" \
-  --type='kubernetes.io/dockerconfigjson'
-#  --type='kubernetes.io'
+oc create -f config.yaml
 oc create secret generic quay-database-credential \
   --from-literal=database-username="$username" \
   --from-literal=database-password="$password" \
