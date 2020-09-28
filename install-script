@@ -19,4 +19,4 @@ oc create secret generic quay-config-app \
 oc create secret generic quay-redis-password \
   --from-literal=password="$password"
 sleep 5
-oc create -f advanced_config_example.yaml 
+oc create -f updated_config.yaml 
