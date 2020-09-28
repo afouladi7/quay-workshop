@@ -6,8 +6,20 @@
 # this script, or are deploying applications, your scripts must cope with
 # the steps having already been run. This is because this script will be
 # run a second time if the container were restarted for some reason.
+namespace=quay
 read user < <(oc project --short)
 oc login -u opentlc-mgr -p r3dh4t1!
+#Create new namespace
+cat << EOF | oc apply -f -
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    openshift.io/cluster-monitoring: "true"
+  name: $namespace
+spec: {}
+EOF
 #Install the Quay Operator
 cat <<EOF | oc apply -f -
 # Base namespace for creation of operator
@@ -16,17 +28,17 @@ apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
   name: quay-enterprise-operatorgroup
-  namespace: $user
+  namespace: $namespace
 spec:
   targetNamespaces:
-  - $user
+  - $namespace
 # Subscription to trigger OLM installation
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: quay-operator
-  namespace: $user
+  namespace: $namespace
 spec:
   channel: quay-v3.3
   installPlanApproval: Automatic
@@ -40,7 +52,7 @@ apiVersion: v1
 kind: ResourceQuota
 metadata:
   name: object-counts
-  namespace: $user
+  namespace: $namespace
 spec:
   hard:
     configmaps: "10" 
@@ -49,5 +61,6 @@ spec:
     secrets: "50" 
     services: "10"
 EOF
-oc adm policy add-role-to-user admin system:serviceaccount:homeroom:$user -n $user
+oc adm policy add-role-to-user admin system:serviceaccount:homeroom:$user -n $namespace
 oc login -u system:serviceaccount:homeroom:$user
+oc project $namespace
