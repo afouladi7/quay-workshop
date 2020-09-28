@@ -9,7 +9,6 @@
 read user < <(oc project --short)
 oc login -u opentlc-mgr -p r3dh4t1!
 #Install the Quay Operator
-oc whoami > text
 cat <<EOF | oc apply -f -
 # Base namespace for creation of operator
 ---
