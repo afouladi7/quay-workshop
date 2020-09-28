@@ -43,7 +43,7 @@ oc new-project workshops
 From within the top level of your Git repository that you added this Git repository as a submodule, you can now run:
 
 ```
-.workshop/scripts/deploy-spawner.sh
+.workshop/workshop-scripts/deploy-spawner.sh
 ```
 
 You must be a cluster admin to be able to deploy the workshop using the spawner.
@@ -58,7 +58,7 @@ The deployment created above will use the declared pre-existing image for the wo
 To deploy the workshop content from your Git repository, or make changes to the workshop content and test them, run:
 
 ```
-.workshop/scripts/build-workshop.sh
+.workshop/workshop-scripts/build-workshop.sh
 ```
 
 This will replace the existing image used by the active deployment.
@@ -70,7 +70,7 @@ When you are happy with your changes, push them back to the remote Git repositor
 If you need to change the RBAC definitions, or what resources are created when a project is created, change the definitions in the ``resources`` and ``templates`` directory if you have them. You can then re-run:
 
 ```
-.workshop/scripts/deploy-spawner.sh
+.workshop/workshop-scripts/deploy-spawner.sh
 ```
 
 and it will update the active definitions.
@@ -78,7 +78,7 @@ and it will update the active definitions.
 Note that if you do this, you will need to re-run:
 
 ```
-.workshop/scripts/build-workshop.sh
+.workshop/workshop-scripts/build-workshop.sh
 ```
 
 to have any local content changes be used once again as it will revert back to using the original image for the workshop.
@@ -89,19 +89,19 @@ Deleting the Workshop
 To delete the spawner and any active sessions, run:
 
 ```
-.workshop/scripts/delete-spawner.sh
+.workshop/workshop-scripts/delete-spawner.sh
 ```
 
 To delete the build configuration for the workshop image, run:
 
 ```
-.workshop/scripts/delete-workshop.sh
+.workshop/workshop-scripts/delete-workshop.sh
 ```
 
 To delete any special resources for CRDs and cluster roles, run:
 
 ```
-.workshop/scripts/delete-resources.sh
+.workshop/workshop-scripts/delete-resources.sh
 ```
 
 Personal Deployment
@@ -114,7 +114,7 @@ To do this, ensure that you have first deleted any spawner deployment created us
 Then run:
 
 ```
-.workshop/scripts/deploy-personal.sh
+.workshop/workshop-scripts/deploy-personal.sh
 ```
 
 You do not need to be cluster admin to deploy a single instance of the workshop.
@@ -122,7 +122,7 @@ You do not need to be cluster admin to deploy a single instance of the workshop.
 If you need to deploy the workshop from the local content, as for when using the spawner, run:
 
 ```
-.workshop/scripts/build-workshop.sh
+.workshop/workshop-scripts/build-workshop.sh
 ```
 
 You do not need to force a re-deployment as it will happen automatically.
@@ -130,7 +130,7 @@ You do not need to force a re-deployment as it will happen automatically.
 To delete the workshop instance run:
 
 ```
-.workshop/scripts/delete-personal.sh
+.workshop/workshop-scripts/delete-personal.sh
 ```
 
 Also run the scripts to delete the build configuration and resources.
