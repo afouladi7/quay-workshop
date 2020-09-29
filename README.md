@@ -54,6 +54,4 @@ $ oc create secret docker-registry <pull_secret_name> \
     --docker-email=<email>     
 ```
 
-Finally run the ```execute
-./install-script
-```
+Finally run the `./install-script`
