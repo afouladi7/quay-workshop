@@ -19,11 +19,17 @@ Your instructor should assign you a user number. Several of the lab exercises in
 ___
 
 ## Instructor Notes
-This workshop can be run on any OpenShift 4.x cluster with Quay 3.x deployed. It can also be done on a Quay instance deployed in HA on virtual machines, although the preferred architecture is Quay on OCP 4.x. You can deploy on top of a vanilla OCP 4.x cluster in RHPDS using the DevSecOps Workshop Deployer found here: [openshift-devsecops](https://github.com/jharmison-redhat/openshift-devsecops).
+This workshop can be run on any OpenShift 4.x cluster with Quay 3.x deployed. It can also be done on a Quay instance deployed in HA on virtual machines, although the preferred architecture is Quay on OCP 4.x. You can deploy on top of a vanilla OCP 4.x cluster in RHPDS.
 
-In order to complete all labs of this workshop, ensure your Quay instance has repo-mirroring enabled. If deploying using the [openshift-devsecops](https://github.com/jharmison-redhat/openshift-devsecops) repo, you'll need to set `enable_quay_repo_mirroring: yes` in the `devsecops.yml` variable file. Repo-mirroring requires a `rwx` storage provider as well.
+Please navigate to the homeroom project in Openshift, under the developer view. You should see the quay operator pods already up and running.
 
-Optionally, students will need a means to push / pull container images in order to complete the lab "Getting images into Quay". This can be done by hosting a RHEL8 instance and allowing students to SSH in. Or, if using the openshift-devsecops workshop deployer, you can use the butterfly project to give students a browser based SSH terminal, thus reducing student workstation requirements to Chrome or Firefox. 
+You will need to create the quay secrets
+
+If you are using homeroom. Run ```install-script``` to create Openshift secrets.
+
+```execute
+./install-script
+```
 
 ## If you already have an existing Openshift 4 Cluster
 
