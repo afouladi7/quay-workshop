@@ -20,6 +20,25 @@ ___
 ## Instructor Notes
 This workshop can be run on any OpenShift 4.x cluster with Quay 3.x deployed. It can also be done on a Quay instance deployed in HA on virtual machines, although the preferred architecture is Quay on OCP 4.x. You can deploy on top of a vanilla OCP 4.x cluster in RHPDS
 
+To run this workshop in homeroom. Please login to your Openshift via the CLI
+
+```
+oc login
+```
+Please create a homeroom project.
+
+```
+oc new-project homeroom
+```
+
+Deploy the homeroom spawner.
+
+```
+./.workshop/workshop-scripts/deploy-spawner.sh
+```
+
+Once the pod is up and open the URL.
+
 Please navigate to the homeroom project in Openshift, under the developer view. You should see the quay operator pods already up and running.
 
 You will need to create the quay secrets
