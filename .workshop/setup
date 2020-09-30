@@ -8,7 +8,7 @@
 # run a second time if the container were restarted for some reason.
 namespace=quay-workshop
 read user < <(oc project --short)
-oc login -u opentlc-mgr -p ${{ secrets.PASS }}
+oc login -u opentlc-mgr
 #Install the Quay Operator
 #Create New Workspace
 cat << EOF | oc apply -f -
