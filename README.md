@@ -41,13 +41,6 @@ Once the pod is up and open the URL.
 
 Please navigate to the homeroom project in Openshift, under the developer view. You should see the quay operator pods already up and running.
 
-You will need to create the quay secrets
-
-If you are using homeroom. Run ```install-script``` to create Openshift secrets.
-
-```execute
-./install-script
-```
 
 ## If you already have an existing Openshift 4 Cluster
 
