@@ -11,7 +11,7 @@ RUN rm -rf /tmp/src/.git* && \
 
 ENV TERMINAL_TAB=split
 
-RUN yum install docker -y
+RUN yum install docker skopeo buildah -y
 
 USER 1001
 
