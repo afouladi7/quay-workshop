@@ -4,7 +4,6 @@ TERMINAL_IMAGE=quay.io/redhatgov/workshop-terminal:latest
 DASHBOARD_IMAGE=quay.io/redhatgov/workshop-dashboard:latest
 SPAWNER_IMAGE=quay.io/openshifthomeroom/workshop-spawner:7.1.0
 CONSOLE_IMAGE=quay.io/openshift/origin-console:4.7
-QUAR_URL=www.google.com
 
 NAME_PREFIX=
 
