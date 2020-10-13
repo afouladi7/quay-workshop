@@ -1,6 +1,7 @@
 #TERMINAL_IMAGE=quay.io/openshifthomeroom/workshop-terminal:3.4.2
 TERMINAL_IMAGE=quay.io/redhatgov/workshop-terminal:latest
-DASHBOARD_IMAGE=quay.io/openshifthomeroom/workshop-dashboard:5.0.0
+#DASHBOARD_IMAGE=quay.io/openshifthomeroom/workshop-dashboard:5.0.0
+DASHBOARD_IMAGE=quay.io/redhatgov/workshop-dashboard:latest
 SPAWNER_IMAGE=quay.io/openshifthomeroom/workshop-spawner:7.1.0
 CONSOLE_IMAGE=quay.io/openshift/origin-console:4.7
 
