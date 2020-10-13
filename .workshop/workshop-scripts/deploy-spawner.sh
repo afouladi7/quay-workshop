@@ -17,7 +17,7 @@ if [ x"$CLUSTER_SUBDOMAIN" == x"" ]; then
         --service dummy --port 8080 > /dev/null 2>&1
 
     if [ "$?" != "0" ]; then
-        fail "Cannot create dummy route $NAME_PREFIX$WORKSHOP_NAME-dummy."
+        echo "Cannot create dummy route $NAME_PREFIX$WORKSHOP_NAME-dummy."
     fi
 
     DUMMY_FQDN=`oc get route/$NAME_PREFIX$WORKSHOP_NAME-dummy -n "$NAMESPACE" -o template --template {{.spec.host}}`
