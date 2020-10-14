@@ -8,6 +8,8 @@
 # run a second time if the container were restarted for some reason.
 namespace=quay-workshop
 oc whoami > user.txt
+echo "user=`oc whoami`" > var.sh
+. var.sh
 #read user < <(oc project --short)
 user=`oc project --short`
 echo $user >> user.txt
