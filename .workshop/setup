@@ -7,11 +7,9 @@
 # the steps having already been run. This is because this script will be
 # run a second time if the container were restarted for some reason.
 namespace=quay-workshop
-oc whoami > user.txt
 echo "user=`oc whoami`" > var.sh
 . var.sh
 #read user < <(oc project --short)
-echo $user >> user.txt
 oc login -u opentlc-mgr -p r3dh4t1!
 #Install the Quay Operator
 #Create New Workspace
@@ -51,10 +49,7 @@ spec:
   sourceNamespace: openshift-marketplace
 # Secret required to pull from quay.io
 EOF
-echo $user >> user.txt
-oc adm policy add-role-to-user admin system:serviceaccount:homeroom:$user -n $namespace
-oc adm policy remove-user system:serviceaccount:homeroom:$user -n $user
-echo $user >> user.txt
-sleep 3
-oc login -u system:serviceaccount:homeroom:$user
-oc project $namespace
+oc adm policy add-role-to-user admin system:serviceaccount:homeroom:$user -n $namespace > output.txt
+oc adm policy remove-user system:serviceaccount:homeroom:$user -n $user >> output.txt
+oc login -u system:serviceaccount:homeroom:$user >> output.txt
+oc project $namespace >> output.txt
