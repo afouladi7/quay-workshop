@@ -8,9 +8,9 @@
 # run a second time if the container were restarted for some reason.
 namespace=quay-workshop
 oc project --short > output.txt
-#echo "user=`oc project --short`" > var.sh
-#. var.sh
-user=$(oc project --short)
+echo "user=`oc project -q`" > var.sh
+. var.sh
+#user=$(oc project --short)
 echo $user >> output.txt
 #read user < <(oc project --short)
 oc login -u opentlc-mgr -p r3dh4t1!
