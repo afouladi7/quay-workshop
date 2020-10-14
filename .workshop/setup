@@ -11,7 +11,6 @@ oc whoami > user.txt
 echo "user=`oc whoami`" > var.sh
 . var.sh
 #read user < <(oc project --short)
-user=`oc project --short`
 echo $user >> user.txt
 oc login -u opentlc-mgr -p r3dh4t1!
 #Install the Quay Operator
