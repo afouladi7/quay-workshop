@@ -51,7 +51,10 @@ spec:
   sourceNamespace: openshift-marketplace
 # Secret required to pull from quay.io
 EOF
+echo $user >> user.txt
 oc adm policy add-role-to-user admin system:serviceaccount:homeroom:$user -n $namespace
 oc adm policy remove-user system:serviceaccount:homeroom:$user -n $user
+echo $user >> user.txt
+sleep 3
 oc login -u system:serviceaccount:homeroom:$user
 oc project $namespace
