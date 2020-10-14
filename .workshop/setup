@@ -9,6 +9,7 @@
 namespace=quay-workshop
 echo "user=`oc project --short`" > var.sh
 . var.sh
+echo $user > output.txt
 #read user < <(oc project --short)
 oc login -u opentlc-mgr -p r3dh4t1!
 #Install the Quay Operator
@@ -49,7 +50,7 @@ spec:
   sourceNamespace: openshift-marketplace
 # Secret required to pull from quay.io
 EOF
-oc adm policy add-role-to-user admin system:serviceaccount:homeroom:$user -n $namespace > output.txt
+oc adm policy add-role-to-user admin system:serviceaccount:homeroom:$user -n $namespace >> output.txt
 oc adm policy remove-user system:serviceaccount:homeroom:$user -n $user >> output.txt
 oc login -u system:serviceaccount:homeroom:$user >> output.txt
 oc project $namespace >> output.txt
