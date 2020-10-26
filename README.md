@@ -35,7 +35,15 @@ oc project homeroom
 Deploy the homeroom spawner.
 
 ```
-./.workshop/workshop-scripts/deploy-spawner.sh
+oc process -f \
+    https://raw.githubusercontent.com/afouladi7/quay-workshop/master/templates/hosted-workshop-production.json \
+    -p SPAWNER_NAMESPACE=homeroom \
+    -p CLUSTER_SUBDOMAIN={{ your_cluster_url }} \
+    -p WORKSHOP_NAME=quay-workshop \
+    -p CONSOLE_IMAGE=quay.io/openshift/origin-console:4.7 \
+    -p WORKSHOP_IMAGE=quay.io/redhatgov/quay-workshop:latest \
+    -p CUSTOM_TAB_1=Quay={{ quay.'CLUSTER_SUBDOMAIN' }} | oc apply -n homeroom -f -
+    
 ```
 
 Once the pod is up and open the URL.
