@@ -7,6 +7,14 @@ metadata:
     openshift.io/cluster-monitoring: "true"
   name: quay
 spec: {}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    openshift.io/cluster-monitoring: "true"
+  name: homeroom
+spec: {}
 # OperatorGroup for OLM configuration
 ---
 apiVersion: operators.coreos.com/v1
