@@ -1,4 +1,4 @@
-# Quay Workshop Instructions
+# Instructions
 Getting started with Quay
 
 This workshop will guide students through the various features of Red Hat Quay version 3.3. It's applicable to anyone who wishes to get hands on managing container images with Red Hat Quay.
