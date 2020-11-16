@@ -72,7 +72,7 @@ oc project homeroom
 ```
 
 ```
-oc create secret docker-registry <pull_secret_name> \
+oc create secret docker-registry redhat-pull-secret \
     --docker-server=<registry_server> \
     --docker-username=<user_name> \
     --docker-password=<password> \
