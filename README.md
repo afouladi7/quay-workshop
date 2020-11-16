@@ -71,10 +71,6 @@ Once installed navigate back to your terminal screen and locate or create the `.
 
 * If you do not already have a Docker credentials file for the secured registry, you can create a secret by running the following
 
-```
-oc create namespace homeroom
-oc project homeroom
-```
 
 ```
 oc create secret docker-registry redhat-pull-secret \
