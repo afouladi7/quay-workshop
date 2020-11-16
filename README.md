@@ -42,7 +42,12 @@ oc process -f \
     -p WORKSHOP_NAME=quay-workshop \
     -p CONSOLE_IMAGE=quay.io/openshift/origin-console:4.7 \
     -p WORKSHOP_IMAGE=quay.io/redhatgov/quay-workshop:latest \
-    -p CUSTOM_TAB_1=Quay={{ quay.'CLUSTER_SUBDOMAIN' }} | oc apply -n homeroom -f -  
+    -p CUSTOM_TAB_1=Webhooks=https://webhook.site | oc apply -n homeroom -f -  
+```
+
+```
+oc create namespace quay
+oc project quay
 ```
 
 Once the pod is up and open the URL.
