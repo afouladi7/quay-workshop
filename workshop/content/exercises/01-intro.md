@@ -1,3 +1,5 @@
+![Quay Dashboard](images/quay-logo.png)
+
 # Instructions
 Getting started with Quay
 
