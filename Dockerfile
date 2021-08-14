@@ -12,7 +12,7 @@ RUN rm -rf /tmp/src/.git* && \
     chgrp -R 0 /run/containers && \
     chown -R 1001 /run/containers && \
     chmod 777 /run/containers && \
-    yum install -y skopeo
+    yum install skopeo -y
 
 ENV TERMINAL_TAB=split
 
