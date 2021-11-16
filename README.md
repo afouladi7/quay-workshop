@@ -40,7 +40,7 @@ oc process -f \
     -p SPAWNER_NAMESPACE=homeroom \
     -p CLUSTER_SUBDOMAIN={{ your_cluster_url }} \
     -p WORKSHOP_NAME=quay-workshop \
-    -p CONSOLE_IMAGE=quay.io/openshift/origin-console:4.7 \
+    -p CONSOLE_IMAGE=quay.io/openshift/origin-console:4.9 \
     -p WORKSHOP_IMAGE=quay.io/redhatgov/quay-workshop:latest \
     -p CUSTOM_TAB_1=Webhooks=https://webhook.site | oc apply -n homeroom -f -  
 ```
